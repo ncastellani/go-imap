@@ -6,7 +6,9 @@ import (
 )
 
 // FetchOptions contains options for the FETCH command.
-type FetchOptions struct{}
+type FetchOptions struct {
+	ChangedSince uint64 // requires CONDSTORE
+}
 
 // FetchItem is a message data item which can be requested by a FETCH command.
 type FetchItem interface {
@@ -38,6 +40,7 @@ var (
 	FetchItemInternalDate  FetchItem = FetchItemKeyword("INTERNALDATE")
 	FetchItemRFC822Size    FetchItem = FetchItemKeyword("RFC822.SIZE")
 	FetchItemUID           FetchItem = FetchItemKeyword("UID")
+	FetchItemModSeq        FetchItem = FetchItemKeyword("MODSEQ")
 )
 
 type PartSpecifier string

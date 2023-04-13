@@ -46,10 +46,18 @@ type SearchCriteria struct {
 
 	Not []SearchCriteria
 	Or  [][2]SearchCriteria
+
+	ModSeq *SearchCriteriaModSeq // requires CONDSTORE
 }
 
 type SearchCriteriaHeaderField struct {
 	Key, Value string
+}
+
+type SearchCriteriaModSeq struct {
+	ModSeq       uint64
+	MetadataName string
+	MetadataType string // TODO: introduce proper type
 }
 
 // SearchData is the data returned by a SEARCH command.

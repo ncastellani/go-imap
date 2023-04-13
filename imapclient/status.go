@@ -116,6 +116,8 @@ func readStatusAttVal(dec *imapwire.Decoder, data *imap.StatusData) error {
 		var storage int64
 		ok = dec.ExpectNumber64(&storage)
 		data.DeletedStorage = &storage
+	case imap.StatusItemHighestModSeq:
+		ok = dec.ExpectModSeq(&data.HighestModSeq)
 	default:
 		if !dec.DiscardValue() {
 			return dec.Err()

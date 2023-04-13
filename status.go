@@ -13,6 +13,7 @@ const (
 
 	StatusItemAppendLimit    StatusItem = "APPENDLIMIT"     // requires APPENDLIMIT
 	StatusItemDeletedStorage StatusItem = "DELETED-STORAGE" // requires QUOTA=RES-STORAGE
+	StatusItemHighestModSeq  StatusItem = "HIGHESTMODSEQ"   // requires CONDSTORE
 )
 
 // StatusData is the data returned by a STATUS command.
@@ -30,4 +31,5 @@ type StatusData struct {
 
 	AppendLimit    *uint32
 	DeletedStorage *int64
+	HighestModSeq  uint64
 }
