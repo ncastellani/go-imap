@@ -7,7 +7,22 @@ import (
 )
 
 // FetchOptions contains options for the FETCH command.
-type FetchOptions struct{}
+type FetchOptions struct {
+	// Fields to fetch
+	BodyStructure     *FetchItemBodyStructure
+	Envelope          bool
+	Flags             bool
+	InternalDate      bool
+	RFC822Size        bool
+	UID               bool
+	BodySection       []*FetchItemBodySection
+	BinarySection     []*FetchItemBinarySection     // requires IMAP4rev2 or BINARY
+	BinarySectionSize []*FetchItemBinarySectionSize // requires IMAP4rev2 or BINARY
+}
+
+type FetchItemBodyStructure struct {
+	Extended bool
+}
 
 // FetchItem is a message data item which can be requested by a FETCH command.
 type FetchItem interface {
