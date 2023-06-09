@@ -192,7 +192,7 @@ func (cmd *List) Handle(conn Conn) error {
 			break
 		}
 
-		if info.Match(cmd.Reference, cmd.Mailbox) {
+		if info.Match(strings.ToLower(info.Name), cmd.Reference, strings.ToLower(cmd.Mailbox)) {
 			ch <- info
 		}
 	}

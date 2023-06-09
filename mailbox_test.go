@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
+	"strings"
 	"testing"
 
 	"github.com/emersion/go-imap"
@@ -103,7 +104,7 @@ var mailboxInfoMatchTests = []struct {
 func TestMailboxInfo_Match(t *testing.T) {
 	for _, test := range mailboxInfoMatchTests {
 		info := &imap.MailboxInfo{Name: test.name, Delimiter: "/"}
-		result := info.Match(test.ref, test.pattern)
+		result := info.Match(strings.ToLower(info.Name), test.ref, strings.ToLower(test.pattern))
 		if result != test.result {
 			t.Errorf("Matching name %q with pattern %q and reference %q returns %v, but expected %v", test.name, test.pattern, test.ref, result, test.result)
 		}

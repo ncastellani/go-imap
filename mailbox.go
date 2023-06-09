@@ -168,8 +168,7 @@ func (info *MailboxInfo) match(name, pattern string) bool {
 
 // Match checks if a reference and a pattern matches this mailbox name, as
 // defined in RFC 3501 section 6.3.8.
-func (info *MailboxInfo) Match(reference, pattern string) bool {
-	name := info.Name
+func (info *MailboxInfo) Match(name, reference, pattern string) bool {
 
 	if info.Delimiter != "" && strings.HasPrefix(pattern, info.Delimiter) {
 		reference = ""
