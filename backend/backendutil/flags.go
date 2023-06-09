@@ -1,7 +1,7 @@
 package backendutil
 
 import (
-	"github.com/emersion/go-imap"
+	imap "github.com/ncastellani/imapServer"
 )
 
 // UpdateFlags executes a flag operation on the flag set current.

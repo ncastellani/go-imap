@@ -4,8 +4,8 @@ import (
 	"net/mail"
 	"strings"
 
-	"github.com/emersion/go-imap"
 	"github.com/emersion/go-message/textproto"
+	imap "github.com/ncastellani/imapServer"
 )
 
 func headerAddressList(value string) ([]*imap.Address, error) {

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/emersion/go-imap"
+	"github.com/ncastellani/imapServer"
 	"github.com/emersion/go-message/textproto"
 )
 

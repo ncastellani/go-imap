@@ -15,9 +15,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/commands"
-	"github.com/emersion/go-imap/responses"
+	imap "github.com/ncastellani/imapServer"
+	"github.com/ncastellani/imapServer/commands"
+	"github.com/ncastellani/imapServer/responses"
 )
 
 // errClosed is used when a connection is closed while waiting for a command

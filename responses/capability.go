@@ -1,8 +1,6 @@
 package responses
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // A CAPABILITY response.
 // See RFC 3501 section 7.2.1

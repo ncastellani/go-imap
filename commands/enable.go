@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // An ENABLE command, defined in RFC 5161 section 3.1.
 type Enable struct {

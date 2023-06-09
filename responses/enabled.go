@@ -1,8 +1,6 @@
 package responses
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // An ENABLED response, defined in RFC 5161 section 3.2.
 type Enabled struct {

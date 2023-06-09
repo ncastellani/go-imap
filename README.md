@@ -1,6 +1,6 @@
 # go-imap
 
-[![godocs.io](https://godocs.io/github.com/emersion/go-imap?status.svg)](https://godocs.io/github.com/emersion/go-imap)
+[![godocs.io](https://godocs.io/github.com/ncastellani/imapServer?status.svg)](https://godocs.io/github.com/ncastellani/imapServer)
 [![builds.sr.ht status](https://builds.sr.ht/~emersion/go-imap/commits/master.svg)](https://builds.sr.ht/~emersion/go-imap/commits/master?)
 
 An [IMAP4rev1](https://tools.ietf.org/html/rfc3501) library written in Go. It
@@ -8,11 +8,11 @@ can be used to build a client and/or a server.
 
 > **Note**
 > This is the README for go-imap v1. go-imap v2 is in development, see the
-> [v2 branch](https://github.com/emersion/go-imap/tree/v2) for more details.
+> [v2 branch](https://github.com/ncastellani/imapServer/tree/v2) for more details.
 
 ## Usage
 
-### Client [![godocs.io](https://godocs.io/github.com/emersion/go-imap/client?status.svg)](https://godocs.io/github.com/emersion/go-imap/client)
+### Client [![godocs.io](https://godocs.io/github.com/ncastellani/imapServer/client?status.svg)](https://godocs.io/github.com/ncastellani/imapServer/client)
 
 ```go
 package main
@@ -20,8 +20,8 @@ package main
 import (
 	"log"
 
-	"github.com/emersion/go-imap/client"
-	"github.com/emersion/go-imap"
+	"github.com/ncastellani/imapServer/client"
+	"github.com/ncastellani/imapServer"
 )
 
 func main() {
@@ -95,7 +95,7 @@ func main() {
 }
 ```
 
-### Server [![godocs.io](https://godocs.io/github.com/emersion/go-imap/server?status.svg)](https://godocs.io/github.com/emersion/go-imap/server)
+### Server [![godocs.io](https://godocs.io/github.com/ncastellani/imapServer/server?status.svg)](https://godocs.io/github.com/ncastellani/imapServer/server)
 
 ```go
 package main
@@ -103,8 +103,8 @@ package main
 import (
 	"log"
 
-	"github.com/emersion/go-imap/server"
-	"github.com/emersion/go-imap/backend/memory"
+	"github.com/ncastellani/imapServer/server"
+	"github.com/ncastellani/imapServer/backend/memory"
 )
 
 func main() {
@@ -150,23 +150,23 @@ Support for other extensions is provided via separate packages. See below.
 ### Extensions
 
 Commands defined in IMAP extensions are available in other packages. See [the
-wiki](https://github.com/emersion/go-imap/wiki/Using-extensions#using-client-extensions)
+wiki](https://github.com/ncastellani/imapServer/wiki/Using-extensions#using-client-extensions)
 to learn how to use them.
 
-* [COMPRESS](https://github.com/emersion/go-imap-compress)
+* [COMPRESS](https://github.com/ncastellani/imapServer-compress)
 * [ID](https://github.com/ProtonMail/go-imap-id)
-* [METADATA](https://github.com/emersion/go-imap-metadata)
+* [METADATA](https://github.com/ncastellani/imapServer-metadata)
 * [NAMESPACE](https://github.com/foxcpp/go-imap-namespace)
-* [QUOTA](https://github.com/emersion/go-imap-quota)
-* [SORT and THREAD](https://github.com/emersion/go-imap-sortthread)
-* [UIDPLUS](https://github.com/emersion/go-imap-uidplus)
+* [QUOTA](https://github.com/ncastellani/imapServer-quota)
+* [SORT and THREAD](https://github.com/ncastellani/imapServer-sortthread)
+* [UIDPLUS](https://github.com/ncastellani/imapServer-uidplus)
 
 ### Server backends
 
-* [Memory](https://github.com/emersion/go-imap/tree/master/backend/memory) (for testing)
-* [Multi](https://github.com/emersion/go-imap-multi)
-* [PGP](https://github.com/emersion/go-imap-pgp)
-* [Proxy](https://github.com/emersion/go-imap-proxy)
+* [Memory](https://github.com/ncastellani/imapServer/tree/master/backend/memory) (for testing)
+* [Multi](https://github.com/ncastellani/imapServer-multi)
+* [PGP](https://github.com/ncastellani/imapServer-pgp)
+* [Proxy](https://github.com/ncastellani/imapServer-proxy)
 * [Notmuch](https://github.com/stbenjam/go-imap-notmuch) - Experimental gateway for [Notmuch](https://notmuchmail.org/)
 
 ### Related projects

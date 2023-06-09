@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // An UNSELECT command.
 // See RFC 3691 section 2.

@@ -5,9 +5,9 @@ import (
 	"io"
 	"testing"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/internal"
+	"github.com/ncastellani/imapServer"
 	"github.com/emersion/go-sasl"
+	"github.com/ncastellani/imapServer/internal"
 )
 
 func TestClient_StartTLS(t *testing.T) {

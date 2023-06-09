@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // StartTLS is a STARTTLS command, as defined in RFC 3501 section 6.2.1.
 type StartTLS struct{}

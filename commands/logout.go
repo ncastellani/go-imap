@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // Logout is a LOGOUT command, as defined in RFC 3501 section 6.1.3.
 type Logout struct{}

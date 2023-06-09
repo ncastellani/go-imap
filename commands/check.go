@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // Check is a CHECK command, as defined in RFC 3501 section 6.4.1.
 type Check struct{}

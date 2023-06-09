@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/emersion/go-imap"
+	imap "github.com/ncastellani/imapServer"
 )
 
 type cmdScanner struct {

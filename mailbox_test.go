@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/internal"
+	imap "github.com/ncastellani/imapServer"
+	"github.com/ncastellani/imapServer/internal"
 )
 
 func TestCanonicalMailboxName(t *testing.T) {

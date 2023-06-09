@@ -1,8 +1,6 @@
 package backend
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // MoveMailbox is a mailbox that supports moving messages.
 type MoveMailbox interface {

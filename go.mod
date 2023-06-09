@@ -1,4 +1,4 @@
-module github.com/emersion/go-imap
+module github.com/ncastellani/imapServer
 
 go 1.13
 

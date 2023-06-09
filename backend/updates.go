@@ -1,7 +1,7 @@
 package backend
 
 import (
-	"github.com/emersion/go-imap"
+	imap "github.com/ncastellani/imapServer"
 )
 
 // Update contains user and mailbox information about an unilateral backend

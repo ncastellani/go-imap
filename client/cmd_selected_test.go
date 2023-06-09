@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/emersion/go-imap"
+	imap "github.com/ncastellani/imapServer"
 )
 
 func TestClient_Check(t *testing.T) {

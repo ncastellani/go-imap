@@ -1,8 +1,6 @@
 package responses
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // An IDLE response.
 type Idle struct {

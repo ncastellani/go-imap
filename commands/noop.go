@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/emersion/go-imap"
-)
+import "github.com/ncastellani/imapServer"
 
 // Noop is a NOOP command, as defined in RFC 3501 section 6.1.2.
 type Noop struct{}
