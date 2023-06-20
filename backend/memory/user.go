@@ -16,6 +16,10 @@ func (u *User) Username() string {
 	return u.username
 }
 
+func (u *User) UpdateClientID(id map[string]string) {
+	return
+}
+
 func (u *User) ListMailboxes(subscribed bool) (mailboxes []backend.Mailbox, err error) {
 	for _, mailbox := range u.mailboxes {
 		if subscribed && !mailbox.Subscribed {

@@ -86,6 +86,10 @@ type User interface {
 	// of INBOX, these are unaffected by a rename of INBOX.
 	RenameMailbox(existingName, newName string) error
 
+	// UpdateClientID keeps beeing called if the client informed an ID
+	// anytime along the session.
+	UpdateClientID(id map[string]string)
+
 	// Logout is called when this User will no longer be used, likely because the
 	// client closed the connection.
 	Logout() error
