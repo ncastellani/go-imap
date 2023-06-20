@@ -296,41 +296,42 @@ func (s *Server) listenUpdates() {
 	for {
 		update := <-s.Updates
 
-		var res imap.WriterTo
-		switch update := update.(type) {
-		case *backend.StatusUpdate:
-			res = update.StatusResp
-		case *backend.MailboxUpdate:
-			res = &responses.Select{Mailbox: update.MailboxStatus}
-		case *backend.MailboxInfoUpdate:
-			ch := make(chan *imap.MailboxInfo, 1)
-			ch <- update.MailboxInfo
-			close(ch)
-
-			res = &responses.List{Mailboxes: ch}
-		case *backend.MessageUpdate:
-			ch := make(chan *imap.Message, 1)
-			ch <- update.Message
-			close(ch)
-
-			res = &responses.Fetch{Messages: ch}
-		case *backend.ExpungeUpdate:
-			ch := make(chan uint32, 1)
-			ch <- update.SeqNum
-			close(ch)
-
-			res = &responses.Expunge{SeqNums: ch}
-		default:
-			s.ErrorLog.Printf("unhandled update: %T\n", update)
-		}
-		if res == nil {
-			continue
-		}
-
 		sends := make(chan struct{})
 		wait := 0
 		s.locker.Lock()
 		for conn := range s.conns {
+
+			var res imap.WriterTo
+			switch update := update.(type) {
+			case *backend.StatusUpdate:
+				res = update.StatusResp
+			case *backend.MailboxUpdate:
+				res = &responses.Select{Mailbox: update.MailboxStatus}
+			case *backend.MailboxInfoUpdate:
+				ch := make(chan *imap.MailboxInfo, 1)
+				ch <- update.MailboxInfo
+				close(ch)
+
+				res = &responses.List{Mailboxes: ch}
+			case *backend.MessageUpdate:
+				ch := make(chan *imap.Message, 1)
+				ch <- update.Message
+				close(ch)
+
+				res = &responses.Fetch{Messages: ch}
+			case *backend.ExpungeUpdate:
+				ch := make(chan uint32, 1)
+				ch <- update.SeqNum
+				close(ch)
+
+				res = &responses.Expunge{SeqNums: ch}
+			default:
+				s.ErrorLog.Printf("unhandled update: %T\n", update)
+			}
+			if res == nil {
+				continue
+			}
+
 			ctx := conn.Context()
 
 			if update.Username() != "" && (ctx.User == nil || ctx.User.Username() != update.Username()) {
