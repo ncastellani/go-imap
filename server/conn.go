@@ -251,7 +251,7 @@ func (c *conn) greet() error {
 		Type:      imap.StatusRespOk,
 		Code:      imap.CodeCapability,
 		Arguments: args,
-		Info:      "IMAP4rev1 Service Ready",
+		Info:      c.s.Greeting,
 	}
 
 	return c.WriteResp(greeting)

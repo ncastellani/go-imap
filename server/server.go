@@ -93,6 +93,8 @@ type Server struct {
 	auths      map[string]SASLServerFactory
 	extensions []Extension
 
+	// Message shown on connection greet
+	Greeting string
 	// TCP address to listen on.
 	Addr string
 	// This server's TLS configuration.
@@ -126,6 +128,7 @@ func New(bkd backend.Backend) *Server {
 		conns:     make(map[Conn]struct{}),
 		Backend:   bkd,
 		ErrorLog:  log.New(os.Stderr, "imap/server: ", log.LstdFlags),
+		Greeting:  "IMAP4rev1 Service Ready",
 	}
 
 	s.auths = map[string]SASLServerFactory{
