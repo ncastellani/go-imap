@@ -304,6 +304,11 @@ func (s *Server) listenUpdates() {
 		s.locker.Lock()
 		for conn := range s.conns {
 
+			// check if user is in IDLE state
+			if !conn.Context().IsIdle {
+				continue
+			}
+
 			var res imap.WriterTo
 			switch update := update.(type) {
 			case *backend.StatusUpdate:

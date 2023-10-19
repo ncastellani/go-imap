@@ -311,12 +311,14 @@ func (cmd *Idle) Handle(conn Conn) error {
 	}
 
 	// Wait for DONE
+	conn.Context().IsIdle = true
 	scanner := bufio.NewScanner(conn)
 	scanner.Scan()
 	if err := scanner.Err(); err != nil {
 		return err
 	}
 
+	conn.Context().IsIdle = false
 	if strings.ToUpper(scanner.Text()) != "DONE" {
 		return errors.New("Expected DONE")
 	}
