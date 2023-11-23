@@ -66,16 +66,16 @@ type MailboxInfoUpdate struct {
 	*imap.MailboxInfo
 }
 
-// MessageUpdate is a message update.
+// MessageUpdate is for messages update.
 type MessageUpdate struct {
 	Update
-	*imap.Message
+	Message []*imap.Message
 }
 
-// ExpungeUpdate is an expunge update.
+// ExpungeUpdate is for expunged messages update.
 type ExpungeUpdate struct {
 	Update
-	SeqNum uint32
+	SeqNum []uint32
 }
 
 // BackendUpdater is a Backend that implements Updater is able to send

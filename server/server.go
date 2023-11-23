@@ -309,6 +309,7 @@ func (s *Server) listenUpdates() {
 				continue
 			}
 
+			// handle each update type
 			var res imap.WriterTo
 			switch update := update.(type) {
 			case *backend.StatusUpdate:
@@ -322,34 +323,40 @@ func (s *Server) listenUpdates() {
 
 				res = &responses.List{Mailboxes: ch}
 			case *backend.MessageUpdate:
-				ch := make(chan *imap.Message, 1)
-				ch <- update.Message
-				close(ch)
+				ch := make(chan *imap.Message, len(update.Message))
+				for _, m := range update.Message {
+					ch <- m
+				}
 
+				close(ch)
 				res = &responses.Fetch{Messages: ch}
 			case *backend.ExpungeUpdate:
-				ch := make(chan uint32, 1)
-				ch <- update.SeqNum
-				close(ch)
+				ch := make(chan uint32, len(update.SeqNum))
+				for _, m := range update.SeqNum {
+					ch <- m
+				}
 
+				close(ch)
 				res = &responses.Expunge{SeqNums: ch}
 			default:
 				s.ErrorLog.Printf("unhandled update: %T\n", update)
 			}
+
 			if res == nil {
 				continue
 			}
 
+			// check if the update is valid for this context
 			ctx := conn.Context()
-
 			if update.Username() != "" && (ctx.User == nil || ctx.User.Username() != update.Username()) {
 				continue
 			}
 			if update.Mailbox() != "" && (ctx.Mailbox == nil || ctx.Mailbox.Name() != update.Mailbox()) {
 				continue
 			}
+
+			// if silent is set, do not send message updates
 			if *conn.silent() {
-				// If silent is set, do not send message updates
 				if _, ok := res.(*responses.Fetch); ok {
 					continue
 				}
