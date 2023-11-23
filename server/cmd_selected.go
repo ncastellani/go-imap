@@ -248,9 +248,8 @@ func (cmd *Store) handle(uid bool, conn Conn) error {
 		return err
 	}
 
-	// Not silent: send FETCH updates if the backend doesn't support message
-	// updates
-	if conn.Server().Updates == nil && !silent {
+	// Not silent: send FETCH updates
+	if !silent {
 		inner := &Fetch{}
 		inner.SeqSet = cmd.SeqSet
 		inner.Items = []imap.FetchItem{imap.FetchFlags}
