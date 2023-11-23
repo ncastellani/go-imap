@@ -56,7 +56,7 @@ type Context struct {
 	MailboxReadOnly bool
 	// Responses to send to the client.
 	Responses chan<- imap.WriterTo
-	// Define if the connection is holding for IMAP IDlE updates
+	// Define if the connection is holding for IMAP IDLE updates
 	IsIdle bool
 	// Closed when the client is logged out.
 	LoggedOut <-chan struct{}
