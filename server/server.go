@@ -217,6 +217,9 @@ func (s *Server) Serve(l net.Listener) error {
 			s.Updates = updater.Updates()
 			go s.listenUpdates()
 		}
+	} else {
+		// remove IDLE from the accepted commands
+		delete(s.commands, "IDLE")
 	}
 
 	for {

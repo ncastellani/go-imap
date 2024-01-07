@@ -306,11 +306,6 @@ type Idle struct {
 
 func (cmd *Idle) Handle(conn Conn) error {
 
-	// tells unknown command if IDLE is disabled
-	if conn.Server().DisableIdle {
-		return errors.New("IDLE is disabled")
-	}
-
 	cont := &imap.ContinuationReq{Info: "idling"}
 	if err := conn.WriteResp(cont); err != nil {
 		return err
