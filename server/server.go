@@ -95,6 +95,8 @@ type Server struct {
 
 	// Message shown on connection greet
 	Greeting string
+	// Allow the IMAP IDLE capability to be disabled
+	DisableIdle bool
 	// TCP address to listen on.
 	Addr string
 	// This server's TLS configuration.
@@ -209,10 +211,12 @@ func (s *Server) Serve(l net.Listener) error {
 		delete(s.listeners, l)
 	}()
 
-	updater, ok := s.Backend.(backend.BackendUpdater)
-	if ok {
-		s.Updates = updater.Updates()
-		go s.listenUpdates()
+	if !s.DisableIdle {
+		updater, ok := s.Backend.(backend.BackendUpdater)
+		if ok {
+			s.Updates = updater.Updates()
+			go s.listenUpdates()
+		}
 	}
 
 	for {

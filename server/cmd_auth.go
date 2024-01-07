@@ -305,6 +305,12 @@ type Idle struct {
 }
 
 func (cmd *Idle) Handle(conn Conn) error {
+
+	// tells unknown command if IDLE is disabled
+	if conn.Server().DisableIdle {
+		return errors.New("IDLE is disabled")
+	}
+
 	cont := &imap.ContinuationReq{Info: "idling"}
 	if err := conn.WriteResp(cont); err != nil {
 		return err
@@ -314,6 +320,7 @@ func (cmd *Idle) Handle(conn Conn) error {
 	conn.Context().IsIdle = true
 	scanner := bufio.NewScanner(conn)
 	scanner.Scan()
+
 	if err := scanner.Err(); err != nil {
 		return err
 	}
@@ -322,5 +329,6 @@ func (cmd *Idle) Handle(conn Conn) error {
 	if strings.ToUpper(scanner.Text()) != "DONE" {
 		return errors.New("Expected DONE")
 	}
+
 	return nil
 }
