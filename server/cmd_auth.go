@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"strings"
+	"time"
 
 	imap "github.com/ncastellani/imapServer"
 	"github.com/ncastellani/imapServer/backend"
@@ -311,11 +312,32 @@ func (cmd *Idle) Handle(conn Conn) error {
 		return err
 	}
 
+	// Setup the "OK Still here" sender
+	heartbeatTicker := time.NewTicker(conn.Server().IdleNotify)
+	heartbeatDone := make(chan bool)
+
+	go func() {
+		for {
+			select {
+			case <-heartbeatDone:
+				return
+			case <-heartbeatTicker.C:
+				sh := &imap.StatusResp{Type: imap.StatusRespOk, Info: "Still here"}
+				conn.WriteResp(sh)
+			}
+		}
+	}()
+
 	// Wait for DONE
 	conn.Context().IsIdle = true
 	scanner := bufio.NewScanner(conn)
 	scanner.Scan()
 
+	// Stop the ticker
+	heartbeatTicker.Stop()
+	heartbeatDone <- true
+
+	// Handle errors
 	if err := scanner.Err(); err != nil {
 		return err
 	}

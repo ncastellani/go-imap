@@ -97,6 +97,8 @@ type Server struct {
 	Greeting string
 	// Allow the IMAP IDLE capability to be disabled
 	DisableIdle bool
+	// Interval to send an "* OK Still here" message when in IDLE
+	IdleNotify time.Duration
 	// TCP address to listen on.
 	Addr string
 	// This server's TLS configuration.
@@ -126,11 +128,12 @@ type Server struct {
 // Create a new IMAP server from an existing listener.
 func New(bkd backend.Backend) *Server {
 	s := &Server{
-		listeners: make(map[net.Listener]struct{}),
-		conns:     make(map[Conn]struct{}),
-		Backend:   bkd,
-		ErrorLog:  log.New(os.Stderr, "imap/server: ", log.LstdFlags),
-		Greeting:  "IMAP4rev1 Service Ready",
+		listeners:  make(map[net.Listener]struct{}),
+		conns:      make(map[Conn]struct{}),
+		Backend:    bkd,
+		ErrorLog:   log.New(os.Stderr, "imap/server: ", log.LstdFlags),
+		Greeting:   "IMAP4rev1 Service Ready",
+		IdleNotify: time.Minute * 5,
 	}
 
 	s.auths = map[string]SASLServerFactory{
